@@ -1,0 +1,30 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 640px;
+}
+
+.list{
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding-left: 0;
+    gap: 20px
+}
+
+.content__text {
+    text-align: center;
+}
+
+.content__details {
+    display: flex;
+    flex-direction: column;
+}
+
+.list__item {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
