@@ -13,19 +13,27 @@ const AppHeader = () => {
             <HeaderItem>
                 <>
                     <div className={cn(styles.menu)}>
-                        <NavLink exact to="/" className={cn(styles.link, "pt-4", "pb-4", "pr-5", "mr-2")} activeClassName={styles.link_active}>
+                        <NavLink to="/" className={cn(styles.link, "pt-4", "pb-4", "pr-5", "mr-2")}
+                                 style={({ isActive }) => ({ color: isActive ? '#F2F2F3' : '#8585AD' })}
+                                 >
                             <BurgerIcon type={pathname === '/' ? "primary" : "secondary"} />
                             <span className={cn("ml-2")}>Конструктор</span>
                         </NavLink>
-                        <NavLink to="/lenta" activeClassName={styles.link_active} className={cn(styles.link, "pt-4", "pb-4", "pr-5", "pl-5")}>
+                        <NavLink to="/lenta" className={cn(styles.link, "pt-4", "pb-4", "pr-5", "pl-5")}
+                                 style={({ isActive }) => ({ color: isActive ? '#F2F2F3' : '#8585AD' })}
+                        >
                             <ListIcon type={pathname === "/lenta" ? "primary" : "secondary"} />
                             <span className={cn("ml-2")}>Лента заказов</span>
                         </NavLink>
                     </div>
-                    <NavLink exact to="/" activeClassName={styles.link_active} className={cn(styles.logo)}>
+                    <NavLink to="/" className={cn(styles.logo)}
+                             style={({ isActive }) => ({ color: isActive ? '#F2F2F3' : '#8585AD' })}
+                    >
                         <Logo/>
                     </NavLink>
-                    <NavLink to="/account" activeClassName={styles.link_active} className={cn(styles.link)}>
+                    <NavLink to="/account" className={cn(styles.link)}
+                             style={({ isActive }) => ({ color: isActive ? '#F2F2F3' : '#8585AD' })}
+                    >
                         <ProfileIcon type={pathname === '/account' ? "primary" : "secondary"} />
                         <span className={cn("pt-4", "pb-4", "pl-5")}>Личный кабинет</span>
                     </NavLink>

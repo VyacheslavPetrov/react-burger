@@ -1,4 +1,5 @@
 import {Config} from '../constants/constants';
+import PropTypes from "prop-types";
 
 export const getProducts = () => {
     return fetch(`${Config.baseUrl}/ingredients`, {
@@ -35,4 +36,19 @@ export const filterArray = (arr) => {
 
 export const getCost = (bun, arrOtherIngredients) => {
     return bun.price * 2 + arrOtherIngredients.reduce((acc, curr) => acc += curr.price, 0)
+}
+
+export const IngredientItems = {
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    proteins: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired,
+    calories: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    image_mobile: PropTypes.string.isRequired,
+    image_large: PropTypes.string.isRequired,
+    __v: PropTypes.number
 }
