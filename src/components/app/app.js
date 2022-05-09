@@ -6,7 +6,7 @@ function App() {
     return (
         <>
             <AppHeader />
-            <Main/>
+            <Main />
         </>
     );
 }
