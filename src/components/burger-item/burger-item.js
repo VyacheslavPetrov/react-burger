@@ -45,7 +45,7 @@ const BurgerItem = ({item, createModal}) => {
     return (
         <li className={cn(styles.card)} onClick={handleClick}>
             <img className={cn(styles.image, "mb-1")} src={item.image_large} alt={item.name}/>
-            <Counter count={1} size="small"/>
+            <Counter count={1} size="small" />
             <PriceItem price={item.price} classMarg="mr-1"/>
             <p className={cn("text text_type_main-default")}>{item.name}</p>
         </li>
