@@ -12,7 +12,7 @@ function Modal({children}) {
     const {setModal} = useContext(ModalContext)
 
     const closeEsc = (evn) => {
-        if (evn.keyCode === 27)
+        if (evn.key === "Escape")
             close();
     }
 

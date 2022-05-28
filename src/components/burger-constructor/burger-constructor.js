@@ -20,7 +20,7 @@ const BurgerConstructor = () => {
             .then((data) => {
                 setModal({
                     visible: true,
-                    content: <OrderDetails number={data.order.number} />
+                    content: <OrderDetails number={data.order.number.toString()} />
                 })
             })
             .catch((err) => {
