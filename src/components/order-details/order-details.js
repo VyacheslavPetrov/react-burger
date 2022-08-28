@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 import checkIcon from "../../images/check.svg"
-
 import styles from "./order-details.module.css";
 
 const OrderDetails = ({number}) => {

@@ -8,7 +8,6 @@ import {filterArray, getProducts} from "../../utils/utils"
 import {IngredientsContext} from "../../utils/ingredientsContext"
 import {ModalContext} from "../../utils/modalContext"
 
-
 const Main = () => {
     const [state, setState] = useState({
         isLoading: false,

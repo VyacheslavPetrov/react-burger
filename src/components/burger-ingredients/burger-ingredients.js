@@ -5,7 +5,6 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import {ModalContext} from "../../utils/modalContext";
 import {IngredientsContext} from "../../utils/ingredientsContext";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
-
 import styles from "./burger-ingredients.module.css"
 
 const BurgerIngredients = () => {

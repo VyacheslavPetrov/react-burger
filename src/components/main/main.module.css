@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 .columns {
     max-width: 1240px;
     display: grid;

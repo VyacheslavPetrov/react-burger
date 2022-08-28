@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 import styles from "./ingredient-details.module.css";
-
 const IngredientDetails = ({image, name, description, calories, proteins, fat, carbohydrates}) => {
 
     return (
