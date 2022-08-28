@@ -7,7 +7,6 @@ import {createOrders, getCost} from "../../utils/utils"
 import {IngredientsContext} from "../../utils/ingredientsContext"
 import {ModalContext} from "../../utils/modalContext"
 import {Button, ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components"
-
 import styles from "./burger-constructor.module.css"
 
 const BurgerConstructor = () => {
