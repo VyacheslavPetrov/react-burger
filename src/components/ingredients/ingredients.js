@@ -23,9 +23,7 @@ Ingredients.propTypes = {
     array: PropTypes.arrayOf(
         PropTypes.shape({
             category: PropTypes.string,
-            items: PropTypes.arrayOf(PropTypes.shape({
-                IngredientItems,
-            }).isRequired),
+            items: PropTypes.arrayOf(PropTypes.shape(IngredientItems).isRequired),
             id: PropTypes.string,
             createModal: PropTypes.func
         })

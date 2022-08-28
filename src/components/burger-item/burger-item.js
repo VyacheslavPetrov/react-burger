@@ -53,9 +53,7 @@ const BurgerItem = ({item, createModal}) => {
 }
 
 BurgerItem.propTypes = {
-    item: PropTypes.shape({
-        IngredientItems,
-    }).isRequired,
+    item: PropTypes.shape(IngredientItems).isRequired,
     createModal: PropTypes.func.isRequired
 }
 
