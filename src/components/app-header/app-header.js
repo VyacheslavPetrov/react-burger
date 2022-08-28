@@ -3,7 +3,6 @@ import cn from "classnames"
 import {NavLink, useLocation} from 'react-router-dom'
 import HeaderItem from "../header-item/header-item"
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components"
-
 import styles from "./app-header.module.css"
 
 const AppHeader = () => {

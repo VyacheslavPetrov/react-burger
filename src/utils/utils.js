@@ -1,6 +1,7 @@
 import {Config} from '../constants/constants';
 import PropTypes from "prop-types";
 
+
 export const getProducts = () => {
     return fetch(`${Config.baseUrl}/ingredients`, {
         method: 'GET',

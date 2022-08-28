@@ -5,7 +5,6 @@ import cn from "classnames"
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components"
 import ModalOverlay from "../modal-overlay/modal-overlay"
 import {ModalContext} from "../../utils/modalContext"
-
 import styles from "./modal.module.css"
 
 function Modal({children}) {

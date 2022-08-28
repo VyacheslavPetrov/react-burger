@@ -3,7 +3,6 @@ import cn from "classnames"
 import PropTypes from "prop-types"
 import BurgerItem from "../burger-item/burger-item"
 import {IngredientItems} from "../../utils/utils"
-
 import styles from "./ingredients.module.css"
 
 
