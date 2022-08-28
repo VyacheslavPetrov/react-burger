@@ -5,7 +5,6 @@ import PriceItem from "../price-item/price-item"
 import {IngredientsContext} from "../../utils/ingredientsContext"
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components"
 import {IngredientItems} from "../../utils/utils"
-
 import styles from "./burger-item.module.css"
 
 
