@@ -51,7 +51,7 @@ export const ingredientsReducer = (state = initialState, action) => {
     }
     case GET_PRODUCTS_FAILED: {
       return {
-        ...state,
+        ...initialState,
         isLoading: false,
         hasError: true
       }
@@ -71,7 +71,7 @@ export const ingredientsReducer = (state = initialState, action) => {
       }
     }
     case CREATE_ORDER_FAILED: {
-      return { ...state,
+      return { ...initialState,
         orderFailed: true,
         orderRequest: false
       }

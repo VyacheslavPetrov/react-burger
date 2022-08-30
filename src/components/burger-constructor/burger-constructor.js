@@ -31,7 +31,7 @@ const BurgerConstructor = ({ onDropHandler }) => {
 
   const handleClick = () => {
     const ingredientsId = otherIngredients.map(el => el._id)
-    dispatch(createOrder([bun._id, ...ingredientsId]));
+    dispatch(createOrder([bun._id, ...ingredientsId, bun._id]));
     dispatch({
       type: OPEN_MODAL,
       content: <OrderDetails />
