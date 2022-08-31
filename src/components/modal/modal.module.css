@@ -1,10 +1,10 @@
-.open_modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+.popup {
     display: flex;
     flex-direction: column;
     background-color: #1C1C21;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
     box-sizing: border-box;
@@ -13,8 +13,7 @@
     border: 1px #4C4CFF;
 }
 
-
-.close_modal {
+.popup__close {
     position: absolute;
     top: 60px;
     right: 40px;
