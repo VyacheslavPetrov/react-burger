@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import cn from 'classnames';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
-import Modal from '../modal/modal';
+import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
+import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
+import Modal from '../../components/modal/modal';
 import styles from './main.module.css';
 import { getIngredients } from '../../services/actions/ingredients';
 import { useSelector, useDispatch } from 'react-redux';
@@ -51,4 +51,4 @@ const Main = () => {
     )
 }
 
-export default Main;
+export default memo(Main);

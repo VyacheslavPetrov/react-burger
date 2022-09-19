@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './price-item.module.css';
 
 const PriceItem = ({ price, classMarg }) => {
   return (
-    <span className={cn("constructor-element__price", 'text', [classMarg])}>
+    <span className={cn(styles['element-price'], 'text', [classMarg])}>
 			{price}
       <CurrencyIcon type="primary" />
 		</span>

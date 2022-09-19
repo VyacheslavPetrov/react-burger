@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
 import cn from 'classnames';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredients from '../ingredients/ingredients';
@@ -29,7 +29,7 @@ const BurgerIngredients = () => {
 
 
 
-    const renderModal = (item) => {
+    const renderModal = useCallback((item) => {
         dispatch({
             type: CURRENT_BURGER,
             item
@@ -38,7 +38,7 @@ const BurgerIngredients = () => {
             type: OPEN_MODAL,
             content: <IngredientDetails />
         })
-    }
+    },[dispatch])
 
     useEffect(() => {
         document.querySelector(`#${current}`).scrollIntoView();
@@ -68,4 +68,4 @@ const BurgerIngredients = () => {
     )
 }
 
-export default BurgerIngredients;
+export default memo(BurgerIngredients);

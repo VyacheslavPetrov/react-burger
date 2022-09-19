@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import cn from 'classnames';
 import styles from './order-details.module.css';
 import checkIcon from '../../images/check.svg';
@@ -27,4 +27,4 @@ const OrderDetails = () => {
 
 
 
-export default OrderDetails;
+export default memo(OrderDetails);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import cn from 'classnames';
 import styles from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
@@ -37,4 +37,4 @@ const IngredientDetails = () => {
     );
 }
 
-export default IngredientDetails;
+export default memo(IngredientDetails);

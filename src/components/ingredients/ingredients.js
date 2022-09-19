@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
@@ -41,4 +41,4 @@ Ingredients.propTypes = {
   )
 }
 
-export default Ingredients;
+export default memo(Ingredients);
