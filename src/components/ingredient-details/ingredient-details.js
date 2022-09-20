@@ -1,11 +1,60 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import cn from 'classnames';
 import styles from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
+import { getProductsRequest } from '../../utils/api';
+import { useParams } from "react-router-dom";
+import Preloader from '../preloader/preloader';
 
 const IngredientDetails = () => {
-    const { currentBurger } = useSelector(store => store.ingredients)
-    const { image, name, calories, proteins, fat, carbohydrates } = currentBurger;
+    const [state, setState] = useState({
+          image: '',
+          name: '',
+          calories: '',
+          proteins: '',
+          fat: '',
+          carbohydrates: '',
+          isLoading: false
+      }
+    )
+
+    let { id } = useParams();
+
+    useEffect(() => {
+        setState((state) => {
+            return {
+                ...state,
+                isLoading: true,
+            };
+        });
+        getProductsRequest().then((res) => {
+            const currentBurger = res.data.find((el) => el._id === id)
+            setState({
+                image: currentBurger.image,
+                name: currentBurger.name,
+                calories: currentBurger.calories,
+                proteins: currentBurger.proteins,
+                fat: currentBurger.fat,
+                carbohydrates: currentBurger.carbohydrates,
+                isLoading: false,
+            })
+        }).catch((err) => {
+            console.log(err)
+            setState((state) => {
+                return {
+                    ...state,
+                    isLoading: false,
+                }
+            })
+        })
+
+    }, [id]);
+
+    const { image, name, calories, proteins, fat, carbohydrates } = state;
+
+    if (state.isLoading) {
+        return (<Preloader />)
+    }
 
     return (
       <div className={cn(styles.content)}>

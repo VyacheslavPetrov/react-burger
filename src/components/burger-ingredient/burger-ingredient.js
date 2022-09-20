@@ -22,25 +22,10 @@ const BurgerIngredient = ({ item, renderModal }) => {
     const isBun = item.type === 'bun'
     const count = isBun && bun && bun._id === item._id ? 2 : counts[item._id] && counts[item._id]
 
-    const card = {
-        image: item.image_large,
-        name: item.name,
-        calories: item.calories,
-        fat: item.fat,
-        carbohydrates: item.carbohydrates,
-        proteins: item.proteins,
-        price: item.price,
-        _id: item._id,
-    }
-
-    const handleClick = () => {
-        renderModal(card)
-    }
-
     const opacity = isDrag ? 0.3 : 1;
 
     return (
-      <li className={cn(styles.card)} onClick={handleClick} ref={dragRef} style={{ opacity }}>
+      <li className={cn(styles.card)} ref={dragRef} style={{ opacity }}>
           <img className={cn(styles.image, 'mb-1')} src={item.image_large} alt={item.name} />
           {	count ?
             <Counter count={count} size='small' /> : null}
@@ -65,7 +50,6 @@ BurgerIngredient.propTypes = {
         image_large: PropTypes.string.isRequired,
         __v: PropTypes.number,
     }).isRequired,
-    renderModal: PropTypes.func.isRequired
 }
 
 export default memo(BurgerIngredient);

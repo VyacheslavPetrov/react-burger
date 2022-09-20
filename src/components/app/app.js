@@ -1,15 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import AppHeader from "../app-header/app-header";
 import { Main, Login, Register, ForgotPassword, ResetPassword, Feed, Order, Profile } from '../../pages';
+import Modal from '../../components/modal/modal';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+import OrderDetails from '../order-details/order-details';
+import { ProtectedRoute } from '../protected-route';
 
 import styles from './app.module.css'
 
 const App = () => {
+
+  const location = useLocation();
+  const history = useHistory();
+  const background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background;
+
     return (
-      <Router>
+      <>
         <AppHeader />
-        <Switch>
+        <Switch location={background || location}>
           <Route path="/" exact={true}>
             <Main />
           </Route>
@@ -34,20 +43,30 @@ const App = () => {
           <Route path="/profile/orders/:id" exact={true}>
             <Order />
           </Route>
-          {/* <Route path="/profile/orders" >
-					<Order />
-				</Route> */}
-          <Route path="/profile">
+          <ProtectedRoute path='/profile/orders/:id' exact={true}>
+            <Order />
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile">
             <Profile />
-          </Route>
+          </ProtectedRoute>
           <Route path="/ingredients/:id" exact={true}>
-            <h1>Здесь будет страница ингредиента. Ей займёмся в следующей проектной работе</h1>
+            <IngredientDetails />
           </Route>
           <Route>
-            <div className={styles.container}><h1> 404 Здесь ничего нет</h1></div>
+            <div className={styles.container}>
+              <h1> 404 Здесь ничего нет</h1>
+            </div>
           </Route>
         </Switch>
-      </Router>
+        {background &&
+        (<>
+            <ProtectedRoute path='/' exact={true} children={<Modal><OrderDetails /></Modal>} />
+            <Route path='/ingredients/:id' children={<Modal><IngredientDetails /></Modal>} />
+            <ProtectedRoute path='/profile/orders/:id' children={<Modal><Order /></Modal>} />
+            <Route path='/feed/:id' children={<Modal><Order /></Modal>} />
+          </>
+        )}
+      </>
     );
 }
 

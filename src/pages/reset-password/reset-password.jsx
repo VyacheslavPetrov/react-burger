@@ -2,7 +2,10 @@ import React, { useState, memo, useCallback } from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { resetPassword } from '../../utils/api';
+import { resetPassword } from '../../services/actions/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { resetPasswordRequest } from '../../utils/api';
 import styles from './reset-password.module.css';
 
 function ResetPassword() {
@@ -10,9 +13,9 @@ function ResetPassword() {
     password: '',
     token: '',
   })
+  const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
-    console.log(state)
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -29,7 +32,7 @@ function ResetPassword() {
 
   const submit = e => {
     e.preventDefault();
-    console.log(state);
+    dispatch(resetPassword(state));
 
     resetPassword(state).then((res) => {
       console.log(res)
@@ -37,6 +40,28 @@ function ResetPassword() {
       console.log(err)
     })
   };
+
+  const isforgotPasswordSaccess = useSelector(store => store.auth.isforgotPasswordSaccess);
+
+  if (localStorage.getItem('refreshToken')) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />
+    );
+  }
+
+  if (!localStorage.getItem('refreshToken') && !isforgotPasswordSaccess) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/forgot-password'
+        }}
+      />
+    );
+  }
 
   return (
     <div className={styles.container}>

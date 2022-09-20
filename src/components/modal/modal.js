@@ -5,21 +5,20 @@ import cn from 'classnames';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import styles from './modal.module.css';
-import { useDispatch } from 'react-redux';
-import { CLOSE_MODAL } from '../../services/actions/modal';
+import { useHistory } from 'react-router-dom';
+import Preloader from '../preloader/preloader';
 
 const Modal = ({ children }) => {
-    const dispatch = useDispatch();
+    let history = useHistory();
+
     const closeEsc = (evn) => {
         if (evn.key === "Escape")
             close();
     }
 
-    const close = () => {
-        dispatch({
-            type: CLOSE_MODAL
-        })
-    }
+    const close = (e) => {
+        history.goBack();
+    };
 
     useEffect(() => {
         window.addEventListener('keydown', closeEsc)

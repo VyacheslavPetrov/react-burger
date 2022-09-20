@@ -2,16 +2,12 @@ import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
 import cn from 'classnames';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredients from '../ingredients/ingredients';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import { useSelector, useDispatch } from 'react-redux';
-import { CURRENT_BURGER } from '../../services/actions/ingredients';
-import { OPEN_MODAL } from '../../services/actions/modal';
+import { useSelector } from 'react-redux';
 
 import styles from './burger-ingredients.module.css';
 
 const BurgerIngredients = () => {
     const [current, setCurrent] = useState('bread');
-    const dispatch = useDispatch();
     const { bun, sauce, main } = useSelector(store => store.ingredients.allIngredients);
     const rootRef = useRef(null);
     const bunRef = useRef(null);
@@ -26,19 +22,6 @@ const BurgerIngredients = () => {
         const currentHeader = minDistance === bunDistance ? 'bread' : minDistance === sauceDistance ? 'sauces' : 'fillings';
         setCurrent(prevState => (currentHeader === prevState.current ? prevState.current : currentHeader))
     }
-
-
-
-    const renderModal = useCallback((item) => {
-        dispatch({
-            type: CURRENT_BURGER,
-            item
-        })
-        dispatch({
-            type: OPEN_MODAL,
-            content: <IngredientDetails />
-        })
-    },[dispatch])
 
     useEffect(() => {
         document.querySelector(`#${current}`).scrollIntoView();
@@ -60,9 +43,9 @@ const BurgerIngredients = () => {
           </div>
 
           <section className={cn(styles.container)} ref={rootRef} onScroll={handleScroll}>
-              <Ingredients title='Булки' array={bun} id="bread" renderModal={renderModal} ref={bunRef} />
-              <Ingredients title='Соусы' array={sauce} id='sauces' renderModal={renderModal} ref={sauceRef} />
-              <Ingredients title='Начинки' array={main} id='fillings' renderModal={renderModal} ref={mainRef} />
+              <Ingredients title='Булки' array={bun} id="bread" ref={bunRef} />
+              <Ingredients title='Соусы' array={sauce} id='sauces' ref={sauceRef} />
+              <Ingredients title='Начинки' array={main} id='fillings' ref={mainRef} />
           </section>
       </section>
     )

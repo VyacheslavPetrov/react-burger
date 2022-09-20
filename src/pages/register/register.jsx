@@ -1,8 +1,10 @@
 import React, { useState, memo, useCallback } from 'react';
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { signUp } from '../../utils/api';
+import { useDispatch } from 'react-redux';
+import { register } from '../../services/actions/auth';
 import styles from './register.module.css';
 
 function Register() {
@@ -11,6 +13,7 @@ function Register() {
     email: '',
     password: '',
   })
+  const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     console.log(state)
@@ -27,16 +30,23 @@ function Register() {
     alert('Icon Click Callback')
   }, [])
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
-
-    console.log(state);
-    signUp(state).then((res) => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-    })
+    dispatch(register(state));
   };
+
+  const hasToken = localStorage.getItem('refreshToken')
+
+
+  if (hasToken) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />
+    );
+  }
 
   return (
     <div className={styles.container}>

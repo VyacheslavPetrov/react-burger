@@ -1,8 +1,10 @@
 import React, { useState, useRef, memo, useCallback } from 'react';
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { signIn } from '../../utils/api';
+import { login } from '../../services/actions/auth';
 import styles from './login.module.css';
 
 function Login() {
@@ -10,7 +12,8 @@ function Login() {
     login: '',
     password: ''
   })
-
+  const userName = useSelector(store => store.auth.name)
+  const dispatch = useDispatch();
   const inputRef = useRef(null)
 
   const handleInputChange = (event) => {
@@ -25,20 +28,25 @@ function Login() {
 
   const onIconClick = useCallback(() => {
     setTimeout(() => inputRef.current.focus(), 0)
-    console.log(inputRef.current)
     alert('Icon Click Callback')
   }, [])
 
   const submit = e => {
     e.preventDefault();
-    console.log(state);
-
-    signIn(state).then((res) => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-    })
+    dispatch(login(state));
   };
+
+  const hasToken = localStorage.getItem('refreshToken')
+
+  if (userName || hasToken) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />
+    );
+  }
 
   return (
     <div className={styles.container}>

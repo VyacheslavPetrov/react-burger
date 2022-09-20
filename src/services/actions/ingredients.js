@@ -1,4 +1,4 @@
-import { getProducts, addOrders } from '../../utils/api';
+import { getProductsRequest, addOrdersRequest } from '../../utils/api';
 import { filterArray } from '../../utils/utils';
 
 export const GET_PRODUCTS_REQUEST = 'GET_PRODUCTS_REQUEST';
@@ -21,7 +21,7 @@ export const getIngredients = () => {
     dispatch({
       type: GET_PRODUCTS_REQUEST
     })
-    getProducts().then((res) => {
+    getProductsRequest().then((res) => {
       const ingredientsObj = filterArray(res.data);
       if (res && res.success) {
         dispatch({
@@ -47,7 +47,7 @@ export const createOrder = (ingredientsId) => {
     dispatch({
       type: CREATE_ORDER_REQUEST
     })
-    addOrders(ingredientsId).then((res) => {
+    addOrdersRequest(ingredientsId).then((res) => {
       if (res && res.success) {
         dispatch({
           type: CREATE_ORDER_SUCCESS,

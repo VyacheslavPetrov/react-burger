@@ -2,7 +2,7 @@ import React, { useState, useRef, memo } from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { forgotPassword } from '../../utils/api';
+import { forgotPassword } from '../../services/actions/auth';
 import styles from './forgot-password.module.css';
 
 function ForgotPassword() {

@@ -9,10 +9,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { ADD_INGREDIENTS, INCREASE_INGREDIENT } from '../../services/actions/ingredients';
+import Preloader from '../../components/preloader/preloader';
 
 
 const Main = () => {
-    const { visible, content } = useSelector(store => store.modal)
+    // const { visible, content } = useSelector(store => store.modal)
     const { isLoading, hasError, loaded } = useSelector(store => store.ingredients);
     const dispatch = useDispatch();
 
@@ -34,7 +35,7 @@ const Main = () => {
 
     return (
       <main className={cn(styles.main, 'p-10')}>
-          {isLoading && 'Загрузка...'}
+          {isLoading && <Preloader />}
           {hasError && 'Произошла ошибка'}
           {!isLoading &&
           !hasError &&
@@ -46,7 +47,6 @@ const Main = () => {
               </div>
           </DndProvider>
           }
-          {visible && <Modal >{content}</Modal>}
       </main >
     )
 }

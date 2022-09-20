@@ -4,7 +4,8 @@ import './index.css';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
-import { rootReducer } from './services/reducers';
+import { rootReducer, history } from './services/reducers';
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import {configureStore} from "@reduxjs/toolkit";
 
 
@@ -20,7 +21,9 @@ const store = configureStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
