@@ -1,8 +1,8 @@
 import React, { useEffect, memo } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import cn from 'classnames';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
-import Modal from '../../components/modal/modal';
 import styles from './main.module.css';
 import { getIngredients } from '../../services/actions/ingredients';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,18 +13,21 @@ import Preloader from '../../components/preloader/preloader';
 
 
 const Main = () => {
-    // const { visible, content } = useSelector(store => store.modal)
+
     const { isLoading, hasError, loaded } = useSelector(store => store.ingredients);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getIngredients())
-    }, [dispatch])
+        if (!loaded) {
+            dispatch(getIngredients());
+        }
+    }, [dispatch, loaded]);
 
     const handleDrop = (item) => {
+        const newItem = { ...item, productId: uuidv4() };
         dispatch({
             type: ADD_INGREDIENTS,
-            item
+            item: newItem
         })
         dispatch({
             type: INCREASE_INGREDIENT,

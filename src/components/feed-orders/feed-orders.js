@@ -6,7 +6,7 @@ import { ordersData } from '../../utils/data';
 import styles from './feed-orders.module.css';
 
 function FeedOrders() {
-  let location = useLocation();
+  const location = useLocation();
   return (
     <section>
       <h1 className={cn('text', 'text_type_main-large', 'mb-5')}>Лента заказов</h1>

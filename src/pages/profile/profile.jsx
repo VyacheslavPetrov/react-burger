@@ -14,7 +14,7 @@ import Preloader from '../../components/preloader/preloader';
 function Profile() {
 
   const dispatch = useDispatch();
-  let location = useLocation();
+  const location = useLocation();
   const { getUserRequest } = useSelector(store => store.auth)
 
   useEffect(() => {

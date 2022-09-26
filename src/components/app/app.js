@@ -60,7 +60,7 @@ const App = () => {
         </Switch>
         {background &&
         (<>
-            <ProtectedRoute path='/' exact={true} children={<Modal><OrderDetails /></Modal>} />
+            <Route path='/' exact={true} children={<Modal><OrderDetails /></Modal>} />
             <Route path='/ingredients/:id' children={<Modal><IngredientDetails /></Modal>} />
             <ProtectedRoute path='/profile/orders/:id' children={<Modal><Order /></Modal>} />
             <Route path='/feed/:id' children={<Modal><Order /></Modal>} />

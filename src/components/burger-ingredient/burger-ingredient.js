@@ -25,13 +25,27 @@ const BurgerIngredient = ({ item, renderModal }) => {
     const opacity = isDrag ? 0.3 : 1;
 
     return (
-      <li className={cn(styles.card)} ref={dragRef} style={{ opacity }}>
-          <img className={cn(styles.image, 'mb-1')} src={item.image_large} alt={item.name} />
-          {	count ?
-            <Counter count={count} size='small' /> : null}
+      <div
+        className={cn(styles.card)}
+        ref={dragRef}
+        style={{ opacity }}
+        data-cy='ingredient'
+      >
+          <img
+            className={cn(styles.image, 'mb-1')}
+            src={item.image_large}
+            alt={item.name}
+          />
+          {count ? <Counter count={count} size='small' /> : null}
           <PriceItem price={item.price} classMarg='mr-1' />
-          <p className={cn('text text_type_main-default')}>{item.name}</p>
-      </li>
+          <p
+            className={cn(
+              'text text_type_main-default'
+            )}
+          >
+              {item.name}
+          </p>
+      </div>
     )
 }
 

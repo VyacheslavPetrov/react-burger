@@ -252,8 +252,14 @@ export const refreshToken = () => {
       } else {
         dispatch({
           type: REFRESH_TOKEN_FAILED,
-        });
+        })
       }
+    }).catch((err) => {
+      deleteCookie('token')
+      localStorage.removeItem('refreshToken');
+      dispatch({
+        type: REFRESH_TOKEN_FAILED,
+      })
     })
-  };
+  }
 }
