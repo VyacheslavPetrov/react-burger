@@ -69,7 +69,7 @@ function Login() {
           name={'password'}
           onChange={handleInputChange}
         />
-        <Button type="primary" size="medium">
+        <Button type="primary" size="medium" htmlType="submit">
           Войти
         </Button>
 
