@@ -4,3 +4,13 @@
     padding: 0;
     gap: 22px;
 }
+
+.list-item {
+
+    list-style-type: none;
+}
+
+.link {
+    text-decoration: none;
+    color: #f2f2f3;
+}

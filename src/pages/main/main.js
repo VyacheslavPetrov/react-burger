@@ -1,29 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import cn from 'classnames';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
-import Modal from '../modal/modal';
+import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
+import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import styles from './main.module.css';
 import { getIngredients } from '../../services/actions/ingredients';
 import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { ADD_INGREDIENTS, INCREASE_INGREDIENT } from '../../services/actions/ingredients';
+import Preloader from '../../components/preloader/preloader';
 
 
 const Main = () => {
-    const { visible, content } = useSelector(store => store.modal)
+
     const { isLoading, hasError, loaded } = useSelector(store => store.ingredients);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getIngredients())
-    }, [dispatch])
+        if (!loaded) {
+            dispatch(getIngredients());
+        }
+    }, [dispatch, loaded]);
 
     const handleDrop = (item) => {
+        const newItem = { ...item, productId: uuidv4() };
         dispatch({
             type: ADD_INGREDIENTS,
-            item
+            item: newItem
         })
         dispatch({
             type: INCREASE_INGREDIENT,
@@ -34,7 +38,7 @@ const Main = () => {
 
     return (
       <main className={cn(styles.main, 'p-10')}>
-          {isLoading && 'Загрузка...'}
+          {isLoading && <Preloader />}
           {hasError && 'Произошла ошибка'}
           {!isLoading &&
           !hasError &&
@@ -46,9 +50,8 @@ const Main = () => {
               </div>
           </DndProvider>
           }
-          {visible && <Modal >{content}</Modal>}
       </main >
     )
 }
 
-export default Main;
+export default memo(Main);

@@ -5,7 +5,6 @@ import {
   GET_PRODUCTS_FAILED,
   ADD_INGREDIENTS,
   DELETE_INGREDIENT,
-  CURRENT_BURGER,
   INCREASE_INGREDIENT,
   DECREASE_INGREDIENT,
   UPDATE_CONSTRUCTOR,
@@ -26,7 +25,6 @@ const initialState = {
     counts: {}
   },
   currentOrder: null,
-  currentBurger: null,
   orderRequest: false,
   orderFailed: false,
 };
@@ -87,12 +85,11 @@ export const ingredientsReducer = (state = initialState, action) => {
           }
         }
       }
-      const newItem = { ...action.item, productId: uuidv4() }
       return {
         ...state,
         burgerIngredients: {
           ...state.burgerIngredients,
-          otherIngredients: [...state.burgerIngredients.otherIngredients, newItem]
+          otherIngredients: [...state.burgerIngredients.otherIngredients, action.item]
         }
       }
     }
@@ -103,12 +100,6 @@ export const ingredientsReducer = (state = initialState, action) => {
           ...state.burgerIngredients,
           otherIngredients: [...state.burgerIngredients.otherIngredients].filter(el => el.productId !== action.id)
         }
-      }
-    }
-    case CURRENT_BURGER: {
-      return {
-        ...state,
-        currentBurger: action.item
       }
     }
     case INCREASE_INGREDIENT: {

@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
+import { Link, useLocation } from "react-router-dom";
 import styles from './ingredients.module.css';
 
 
-const Ingredients = React.forwardRef(({ title, array, id, renderModal }, ref) => {
+const Ingredients = React.forwardRef(({ title, array, id }, ref) => {
+  const location = useLocation();
   return (
     <section className={"mb-10"} >
       <h2 id={id} ref={ref} className={cn("text", "text_type_main-medium", "mb-6")}>{title}</h2>
-      <ul className={cn(styles.list, "ml-4")}>
-        {array.map((el) => <BurgerIngredient item={el} key={el._id} renderModal={renderModal} />)}
+      <ul className={cn(styles.list, 'ml-4')}>
+        {array.map((el) => (
+          <li className={styles['list-item']} key={el._id}>
+            <Link to={{
+              pathname: `/ingredients/${el._id}`,
+              state: { background: location }
+            }}
+                  className={styles.link}>
+              <BurgerIngredient item={el} />
+            </Link>
+          </li>
+        ))}
       </ul>
     </section>
   )
@@ -41,4 +53,4 @@ Ingredients.propTypes = {
   )
 }
 
-export default Ingredients;
+export default memo(Ingredients);

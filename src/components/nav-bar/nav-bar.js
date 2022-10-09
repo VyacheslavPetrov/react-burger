@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styles from './nav-bar.module.css';
@@ -17,4 +17,4 @@ NavBar.propTypes = {
     children: PropTypes.element
 }
 
-export default NavBar;
+export default memo(NavBar);

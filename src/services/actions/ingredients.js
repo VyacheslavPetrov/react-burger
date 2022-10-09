@@ -1,4 +1,4 @@
-import { getProducts, addOrders } from '../../utils/api';
+import { getProductsRequest, addOrdersRequest } from '../../utils/api';
 import { filterArray } from '../../utils/utils';
 
 export const GET_PRODUCTS_REQUEST = 'GET_PRODUCTS_REQUEST';
@@ -9,7 +9,6 @@ export const INCREASE_INGREDIENT = 'INCREASE_INGREDIENT';
 export const DECREASE_INGREDIENT = 'DECREASE_INGREDIENT';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT'
 export const ADD_INGREDIENTS = 'ADD_INGREDIENTS';
-export const CURRENT_BURGER = 'CURRENT_BURGER';
 export const UPDATE_CONSTRUCTOR = 'UPDATE_CONSTRUCTOR';
 
 export const CREATE_ORDER_REQUEST = 'CREATE_ORDER_REQUEST';
@@ -21,7 +20,7 @@ export const getIngredients = () => {
     dispatch({
       type: GET_PRODUCTS_REQUEST
     })
-    getProducts().then((res) => {
+    getProductsRequest().then((res) => {
       const ingredientsObj = filterArray(res.data);
       if (res && res.success) {
         dispatch({
@@ -47,7 +46,7 @@ export const createOrder = (ingredientsId) => {
     dispatch({
       type: CREATE_ORDER_REQUEST
     })
-    addOrders(ingredientsId).then((res) => {
+    addOrdersRequest(ingredientsId).then((res) => {
       if (res && res.success) {
         dispatch({
           type: CREATE_ORDER_SUCCESS,

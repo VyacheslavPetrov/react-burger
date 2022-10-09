@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
-import { rootReducer } from './services/reducers';
+import { rootReducer, history } from './services/reducers';
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import {configureStore} from "@reduxjs/toolkit";
 
 
@@ -20,11 +20,11 @@ const store = configureStore({
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
         <App />
-      </Provider>
-    </BrowserRouter>
+      </ConnectedRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

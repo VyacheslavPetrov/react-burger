@@ -1,8 +1,13 @@
 import { combineReducers } from 'redux';
 import { ingredientsReducer } from './ingredients';
-import { modalReducer } from './modal';
+import { authReducer } from './auth';
+import { connectRouter } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
+
+export const history = createBrowserHistory();
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
-  modal: modalReducer,
+  auth: authReducer,
+  router: connectRouter(history),
 });
