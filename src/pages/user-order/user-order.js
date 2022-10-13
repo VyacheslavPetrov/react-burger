@@ -1,21 +1,21 @@
 import React, { memo, useEffect } from 'react';
 import cn from 'classnames';
-import styles from './order.module.css';
+import styles from './user-order.module.css';
 import { useParams, Redirect } from 'react-router-dom';
 import PriceItem from '../../ui/price-item/price-item';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../services/actions/ws-actions';
+import { WS_CONNECTION_START_AUTH, WS_CONNECTION_CLOSED_AUTH } from '../../services/actions/ws-actions-auth';
 import Preloader from '../../components/preloader/preloader';
 import { conversionDateForCard } from '../../utils/utils';
 import { getIngredients } from '../../services/actions/ingredients';
 
-function Order() {
+function UserOrder() {
   const dispatch = useDispatch();
   useEffect(
     () => {
-      dispatch({ type: WS_CONNECTION_START });
-      return () => dispatch({ type: WS_CONNECTION_CLOSED });
+      dispatch({ type: WS_CONNECTION_START_AUTH });
+      return () => ({ type: WS_CONNECTION_CLOSED_AUTH })
     },
     [dispatch]
   );
@@ -28,8 +28,11 @@ function Order() {
   }, [dispatch, loaded]);
 
   const { allIngredients } = useSelector(store => store.ingredients)
+
+
+
   const { id } = useParams();
-  const { orders } = useSelector(store => store.ws.messages)
+  const { orders } = useSelector(store => store.wsAuth.messages)
   const { wsConnected } = useSelector(store => store.ws)
   const filterOrders = (arr, id) => {
     return arr?.filter((el) => el.number === Number(id))[0]
@@ -87,8 +90,8 @@ function Order() {
         Состав:
       </p>
       <ul className={cn(styles.list, 'mb-10')}>
-        {arrUniqItem.map(el => {
-          return <li className={cn(styles['list-item'], 'mr-6')} key={bI.item[el]?._id}>
+        {arrUniqItem.map((el, i) => {
+          return <li className={cn(styles['list-item'], 'mr-6')} key={i}>
             <div className={cn(styles.icon, 'mr-4')}>
               <img src={bI.item[el]?.image_mobile} alt='Вкусная булка' className={cn(styles.image)} />
             </div>
@@ -102,22 +105,22 @@ function Order() {
               {bI.item[el]?.name}
             </p>
             <span className={cn('mr-1', 'text text_type_digits-default')}>
-              {bI.count[el]} x{' '}
-            </span>
+							{bI.count[el]} x{' '}
+						</span>
             <PriceItem price={bI.item[el]?.price} />
           </li>
         })}
       </ul>
       <div className={styles.info}>
-        <span
+				<span
           className={cn('text text_type_main-default text_color_inactive')}
         >
-          {stringWithDay}
-        </span>
+					{stringWithDay}
+				</span>
         <PriceItem price={burgerPrice} />
       </div>
     </div>
   );
 }
 
-export default memo(Order);
+export default memo(UserOrder);

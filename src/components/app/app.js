@@ -1,7 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import AppHeader from "../app-header/app-header";
-import { Main, Login, Register, ForgotPassword, ResetPassword, Feed, Order, Profile } from '../../pages';
+import { Main, Login, Register, ForgotPassword, ResetPassword, Feed, Order, Profile, UserOrder } from '../../pages';
 import Modal from '../../components/modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
@@ -37,11 +37,11 @@ const App = () => {
           <Route path="/feed" exact={true}>
             <Feed />
           </Route>
-          <Route path="/feed/:id" exact={true}>
+          <Route path="/feed/:id" >
             <Order />
           </Route>
           <Route path="/profile/orders/:id" exact={true}>
-            <Order />
+            <UserOrder />
           </Route>
           <ProtectedRoute path='/profile/orders/:id' exact={true}>
             <Order />
@@ -62,7 +62,7 @@ const App = () => {
         (<>
             <Route path='/' exact={true} children={<Modal><OrderDetails /></Modal>} />
             <Route path='/ingredients/:id' children={<Modal><IngredientDetails /></Modal>} />
-            <ProtectedRoute path='/profile/orders/:id' children={<Modal><Order /></Modal>} />
+            <ProtectedRoute path='/profile/orders/:id' children={<Modal><UserOrder /></Modal>} />
             <Route path='/feed/:id' children={<Modal><Order /></Modal>} />
           </>
         )}

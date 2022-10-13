@@ -18,7 +18,7 @@ const initialState = {
   isLoading: false,
   loaded: false,
   hasError: false,
-  allIngredients: {},
+  allIngredients: [],
   burgerIngredients: {
     bun: null,
     otherIngredients: [],
@@ -42,6 +42,7 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         hasError: false,
+        allIngredientsArr: action.itemsArr,
         allIngredients: action.items,
         loaded: true,
         isLoading: false
@@ -65,7 +66,12 @@ export const ingredientsReducer = (state = initialState, action) => {
       return { ...state,
         orderFailed: false,
         currentOrder: action.order,
-        orderRequest: false
+        orderRequest: false,
+        burgerIngredients: {
+          bun: null,
+          otherIngredients: [],
+          counts: {},
+        },
       }
     }
     case CREATE_ORDER_FAILED: {

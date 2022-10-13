@@ -34,7 +34,10 @@ export const addOrdersRequest = (ingredients) => {
     mode: 'cors',
     cache: 'no-cache',
     credentials: 'same-origin',
-    headers: Config.headers,
+    headers: {
+      ...Config.baseUrl.headers,
+      Authorization: 'Bearer ' + getCookie('token'),
+    },
     body: JSON.stringify(
       { ingredients }
     ),

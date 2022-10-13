@@ -4,3 +4,6 @@ export const Config = {
         'Content-Type': 'application/json'
     }
 }
+
+export const WS_URL = 'wss://norma.nomoreparties.space/orders/all';
+export const WS_URL_AUTH = 'wss://norma.nomoreparties.space/orders';

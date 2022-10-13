@@ -4,19 +4,9 @@ import './index.css';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
-import { rootReducer, history } from './services/reducers';
-import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
-import {configureStore} from "@reduxjs/toolkit";
-
-
-const store = configureStore({
-  reducer: rootReducer,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-  devTools: process.env.NODE_ENV === "development"
-});
+import { history } from './services/reducers';
+import { ConnectedRouter } from 'connected-react-router';
+import { store } from './store';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -9,7 +9,7 @@
     gap: 60px;
 }
 
-.list {
+/*.list {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -22,7 +22,7 @@
 
 .list-item{
     max-width: 790px;
-}
+}*/
 
 ::-webkit-scrollbar {
     width: 12px;
@@ -39,10 +39,10 @@
     border-radius: 6px;
 }
 
-.burger-link {
+/*.burger-link {
     text-decoration: none;
     color: #F2F2F3;
-}
+}*/
 
 .container{
     display: flex;

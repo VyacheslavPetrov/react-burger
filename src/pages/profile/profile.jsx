@@ -6,6 +6,7 @@ import OrdersItem from '../../components/orders-item/orders-item';
 import { ordersData } from '../../utils/data';
 import NavProfile from '../../components/nav-profile/nav-profile';
 import FormsProfile from '../../components/forms-profile/forms-profile';
+import ProfileOrders from '../../components/profile-orders/profile-orders';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../services/actions/auth';
 import Preloader from '../../components/preloader/preloader';
@@ -33,15 +34,7 @@ function Profile() {
           <FormsProfile />
         </Route>
         <Route path="/profile/orders" exact={true} >
-          <ul className={cn(styles.list, 'mb-20')}>
-            {ordersData.map((el, i) => (
-              <li className={cn(styles['list-item'])} key={i}>
-                <Link to={{ pathname: `/profile/orders/${el.order.number}`, state: { background: location } }} className={styles['burger-link']}>
-                  <OrdersItem number={el.order.number} name={el.name} status={el.order.status} />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <ProfileOrders />
 
         </Route>
         <Route>

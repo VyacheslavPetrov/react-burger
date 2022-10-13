@@ -21,11 +21,10 @@ export const getIngredients = () => {
       type: GET_PRODUCTS_REQUEST
     })
     getProductsRequest().then((res) => {
-      const ingredientsObj = filterArray(res.data);
       if (res && res.success) {
         dispatch({
           type: GET_PRODUCTS_SUCCESS,
-          items: ingredientsObj
+          items: res.data
         });
       } else {
         dispatch({

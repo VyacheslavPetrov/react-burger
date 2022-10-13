@@ -56,3 +56,30 @@ export const setCookie = (name, value, props) => {
 export const deleteCookie = (name) => {
   setCookie(name, null, { expires: -1 });
 };
+
+//получить дату создания заказа
+const getDaysForCard = (days) => (
+  days === 0 ? 'Сегодня'
+    : days === 1 ? 'Вчера'
+    : days > 1 ? `${days} дня(-ей) назад`
+      : 'Что-то пошло не так:(');
+
+//сформировать тату создания заказа для карточки
+export const conversionDateForCard = (date) => {
+  const dayCreated = new Date(date);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diffTime = Math.ceil((today - dayCreated) / (60 * 60 * 24 * 1000));
+  const hours = dayCreated.getHours() > 9 ? dayCreated.getHours() : `0${dayCreated.getHours()}`
+  const min = dayCreated.getMinutes() > 9 ? dayCreated.getMinutes() : `0${dayCreated.getMinutes()}`
+
+  return `${getDaysForCard(diffTime)}, ${hours}:${min} i-GMT+${dayCreated.getTimezoneOffset() * (-1) / 60}`;
+};
+
+//сортировка заказов по статусу
+export const filterOrdersByStatus = (arr) => {
+  return arr?.reduce((acc, curr) => {
+    curr.status === 'done' ? acc['done'] = [...acc['done'], curr] : acc['pending'] = [...acc['pending'], curr]
+    return acc;
+  }, { done: [], pending: [] })
+}
