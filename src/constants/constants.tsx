@@ -1,9 +1,2 @@
-export const Config = {
-    baseUrl: 'https://norma.nomoreparties.space/api',
-    headers: {
-        'Content-Type': 'application/json'
-    }
-}
-
-export const WS_URL = 'wss://norma.nomoreparties.space/orders/all';
-export const WS_URL_AUTH = 'wss://norma.nomoreparties.space/orders';
+export const NUNBER_OF_ELEMENTS_TO_BE_DRAWN = 6
+export const COUNT_BUN = 2

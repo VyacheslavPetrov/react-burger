@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-    gap: 22px;
+    gap: 24px;
 }
 
 .list-item {

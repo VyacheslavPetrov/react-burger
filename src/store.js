@@ -5,7 +5,7 @@ import { routerMiddleware } from 'connected-react-router';
 import thunk from 'redux-thunk';
 import { wsActions } from './services/actions/ws-actions';
 import { wsActionsAuth } from './services/actions/ws-actions-auth';
-import { WS_URL, WS_URL_AUTH } from './constants/constants';
+import { WS_URL, WS_URL_AUTH } from './constants/config';
 
 
 const composeEnhancers =

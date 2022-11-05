@@ -4,7 +4,9 @@ import {
   GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILED,
   CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAILED,
   ADD_INGREDIENTS, DELETE_INGREDIENT, UPDATE_CONSTRUCTOR,
-  INCREASE_INGREDIENT, DECREASE_INGREDIENT
+  INCREASE_INGREDIENT, DECREASE_INGREDIENT,
+  GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_FAILED,
+  GET_USER_ORDER_REQUEST, GET_USER_ORDER_SUCCESS, GET_USER_ORDER_FAILED,
 } from '../actions/ingredients';
 
 const initialState = {
@@ -20,6 +22,7 @@ const initialState = {
   currentOrder: null,
   orderRequest: false,
   orderFailed: false,
+  orderLoaded: false
 };
 
 describe('ingredients reducer', () => {
@@ -48,7 +51,6 @@ describe('ingredients reducer', () => {
       })
     ).toEqual(expect.objectContaining({
       allIngredients: data,
-
       isLoading: false,
       hasError: false,
       loaded: true,
@@ -62,7 +64,6 @@ describe('ingredients reducer', () => {
       })
     ).toEqual(expect.objectContaining({
       allIngredients: [],
-
       isLoading: false,
       hasError: true,
       loaded: false,
@@ -76,7 +77,6 @@ describe('ingredients reducer', () => {
       })
     ).toEqual(expect.objectContaining({
       currentOrder: null,
-
       orderRequest: true,
       orderFailed: false,
     }))
@@ -100,7 +100,6 @@ describe('ingredients reducer', () => {
         success: true,
         __proto__: Object
       },
-
       orderRequest: false,
       orderFailed: false,
     }))
@@ -113,7 +112,142 @@ describe('ingredients reducer', () => {
       })
     ).toEqual(expect.objectContaining({
       currentOrder: null,
+      orderRequest: false,
+      orderFailed: true,
+    }))
+  })
 
+  it('should handle GET_ORDER_REQUEST', () => {
+    expect(
+      ingredientsReducer(initialState, {
+        type: GET_ORDER_REQUEST
+      })
+    ).toEqual(expect.objectContaining({
+      currentOrder: null,
+      orderRequest: true,
+      orderFailed: false,
+      orderLoaded: false
+    }))
+  })
+
+  it('should handle GET_ORDER_SUCCESS', () => {
+    expect(
+      ingredientsReducer(initialState, {
+        type: GET_ORDER_SUCCESS,
+        order: null
+      })
+    ).toEqual(expect.objectContaining({
+      currentOrder: null,
+      orderRequest: false,
+      orderFailed: false,
+      orderLoaded: true
+    }))
+    expect(
+      ingredientsReducer(initialState, {
+        type: GET_ORDER_SUCCESS,
+        order: {
+          _id: "60da447273a639001a192d24",
+          owner: "60d72a588425d0001ba63f20",
+          status: "done",
+          number: 28,
+          name: "Флюоресцентный антарианский space бургер",
+          createdAt: "2021-06-28T21:51:46.040Z",
+          updatedAt: "2021-06-30T11:09:54.054Z",
+          __v: 0,
+        }
+      })
+    ).toEqual(expect.objectContaining({
+      currentOrder: {
+        _id: "60da447273a639001a192d24",
+        owner: "60d72a588425d0001ba63f20",
+        status: "done",
+        number: 28,
+        name: "Флюоресцентный антарианский space бургер",
+        createdAt: "2021-06-28T21:51:46.040Z",
+        updatedAt: "2021-06-30T11:09:54.054Z",
+        __v: 0,
+      },
+      orderRequest: false,
+      orderFailed: false,
+      orderLoaded: true
+    }))
+  })
+
+  it('should handle GET_ORDER_FAILED', () => {
+    expect(
+      ingredientsReducer(initialState, {
+        type: GET_ORDER_FAILED
+      })
+    ).toEqual(expect.objectContaining({
+      currentOrder: null,
+      orderRequest: false,
+      orderFailed: true,
+    }))
+  })
+
+  it('should handle GET_USER_ORDER_REQUEST', () => {
+    expect(
+      ingredientsReducer(initialState, {
+        type: GET_USER_ORDER_REQUEST
+      })
+    ).toEqual(expect.objectContaining({
+      currentOrder: null,
+      orderRequest: true,
+      orderFailed: false,
+      orderLoaded: false
+    }))
+  })
+
+  it('should handle GET_USER_ORDER_SUCCESS', () => {
+    expect(
+      ingredientsReducer(initialState, {
+        type: GET_USER_ORDER_SUCCESS,
+        order: null
+      })
+    ).toEqual(expect.objectContaining({
+      currentOrder: null,
+      orderRequest: false,
+      orderFailed: false,
+      orderLoaded: true
+    }))
+    expect(
+      ingredientsReducer(initialState, {
+        type: GET_USER_ORDER_SUCCESS,
+        order: {
+          _id: "60da447273a639001a192d24",
+          owner: "60d72a588425d0001ba63f20",
+          status: "done",
+          number: 28,
+          name: "Флюоресцентный антарианский space бургер",
+          createdAt: "2021-06-28T21:51:46.040Z",
+          updatedAt: "2021-06-30T11:09:54.054Z",
+          __v: 0,
+        }
+      })
+    ).toEqual(expect.objectContaining({
+      currentOrder: {
+        _id: "60da447273a639001a192d24",
+        owner: "60d72a588425d0001ba63f20",
+        status: "done",
+        number: 28,
+        name: "Флюоресцентный антарианский space бургер",
+        createdAt: "2021-06-28T21:51:46.040Z",
+        updatedAt: "2021-06-30T11:09:54.054Z",
+        __v: 0,
+      },
+      orderRequest: false,
+      orderFailed: false,
+      orderLoaded: true
+    }))
+  })
+
+  it('should handle GET_USER_ORDER_FAILED', () => {
+    expect(
+      ingredientsReducer(initialState, {
+        type: GET_USER_ORDER_FAILED
+      })
+    ).toEqual(expect.objectContaining({
+      currentOrder: null,
       orderRequest: false,
       orderFailed: true,
     }))
@@ -144,9 +278,9 @@ describe('ingredients reducer', () => {
         counts: {},
       },
       currentOrder: null,
-      currentBurger: null,
       orderRequest: false,
       orderFailed: false,
+      orderLoaded: false
     }
 
     const stateWithOtherIngredients = {
@@ -212,9 +346,9 @@ describe('ingredients reducer', () => {
         counts: {},
       },
       currentOrder: null,
-      currentBurger: null,
       orderRequest: false,
       orderFailed: false,
+      orderLoaded: false
     }
 
     expect(
@@ -415,9 +549,9 @@ describe('ingredients reducer', () => {
         counts: {},
       },
       currentOrder: null,
-      currentBurger: null,
       orderRequest: false,
       orderFailed: false,
+      orderLoaded: false
     }
 
     expect(
@@ -536,7 +670,8 @@ describe('ingredients reducer', () => {
       isLoading: false,
       loaded: true,
       orderFailed: false,
-      orderRequest: false
+      orderRequest: false,
+      orderLoaded: false
     }
     expect(
       ingredientsReducer(state, {
@@ -598,7 +733,8 @@ describe('ingredients reducer', () => {
       isLoading: false,
       loaded: true,
       orderFailed: false,
-      orderRequest: false
+      orderRequest: false,
+      orderLoaded: false
     })
   })
 
@@ -689,5 +825,4 @@ describe('ingredients reducer', () => {
       }).burgerIngredients.counts["60cb6564fce49c00269d401e"]
     ).toBe(2)
   })
-
 })

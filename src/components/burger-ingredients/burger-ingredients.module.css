@@ -1,16 +1,16 @@
 .link {
     text-decoration: none;
-    color: #8585AD;
+    color: #8585ad;
 }
 
 .item {
     list-style-type: none;
-    box-shadow: inset 0px -2px 0px #2F2F37;
+    box-shadow: inset 0px -2px 0px #2f2f37;
 }
 
 .item_active {
-    color: #F2F2F3;
-    box-shadow: inset 0px -2px 0px #4C4CFF;
+    color: #f2f2f3;
+    box-shadow: inset 0px -2px 0px #4c4cff;
 }
 
 .menu {
@@ -26,16 +26,13 @@
 ::-webkit-scrollbar {
     width: 12px;
     height: 300px;
-
 }
 ::-webkit-scrollbar-track {
-    background: #2F2F37;
+    background: #2f2f37;
     height: 300px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #8585AD;
-    border: 2px solid #2F2F37;
+    background: #8585ad;
+    border: 2px solid #2f2f37;
     border-radius: 6px;
 }
-
-

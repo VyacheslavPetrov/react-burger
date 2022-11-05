@@ -9,42 +9,21 @@
     gap: 60px;
 }
 
-/*.list {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    list-style-type: none;
-    padding-left: 0;
-    max-height: 600px;
-    flex: 1;
-    overflow-y: scroll;
-}
-
-.list-item{
-    max-width: 790px;
-}*/
-
 ::-webkit-scrollbar {
     width: 12px;
     height: 300px;
-
 }
 ::-webkit-scrollbar-track {
-    background: #2F2F37;
+    background: #2f2f37;
     height: 300px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #8585AD;
-    border: 2px solid #2F2F37;
+    background: #8585ad;
+    border: 2px solid #2f2f37;
     border-radius: 6px;
 }
 
-/*.burger-link {
-    text-decoration: none;
-    color: #F2F2F3;
-}*/
-
-.container{
+.container {
     display: flex;
     align-self: flex-start;
     justify-content: center;

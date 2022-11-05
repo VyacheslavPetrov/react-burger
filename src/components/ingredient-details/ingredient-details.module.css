@@ -1,16 +1,19 @@
 .content {
     display: flex;
+    align-self: center;
+    justify-content: center;
+    flex-grow: 1;
     flex-direction: column;
-    box-sizing: border-box;
+    text-align: center;
     width: 640px;
 }
 
-.list{
+.list {
     display: flex;
     justify-content: space-between;
     margin: 0;
     padding-left: 0;
-    gap: 20px
+    gap: 20px;
 }
 
 .content__text {
