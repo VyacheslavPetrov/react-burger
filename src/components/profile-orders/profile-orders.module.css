@@ -1,0 +1,19 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    list-style-type: none;
+    padding-left: 0;
+    max-height: 600px;
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.list-item {
+    max-width: 790px;
+}
+
+.burger-link {
+    text-decoration: none;
+    color: #f2f2f3;
+}

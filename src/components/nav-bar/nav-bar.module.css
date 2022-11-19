@@ -1,8 +1,34 @@
 .nav-bar {
     width: 1240px;
     display: grid;
-    grid-template-columns: repeat( 3, minmax(200px, 413px) );
+    grid-template-columns: repeat(3, minmax(200px, 413px));
     column-gap: 50px;
     align-items: center;
     box-sizing: border-box;
+}
+
+.link {
+    text-decoration: none;
+    color: #8585ad;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.link:last-child {
+    justify-self: flex-end;
+    margin-right: 0;
+}
+
+.link_active {
+    color: #f2f2f3;
+}
+
+.logo {
+    justify-self: center;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
 }

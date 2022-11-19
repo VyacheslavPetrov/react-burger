@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-.burger-container{
+.burger-container {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -18,11 +18,11 @@
 }
 
 .burger-container_active {
-    background-color: #1C1C21;
+    background-color: #1c1c21;
 }
 
 .burger-container_candrop {
-    border: 10px solid #1C1C21;
+    border: 10px solid #1c1c21;
 }
 
 .list {
@@ -39,15 +39,14 @@
 ::-webkit-scrollbar {
     width: 12px;
     height: 300px;
-
 }
 ::-webkit-scrollbar-track {
-    background: #2F2F37;
+    background: #2f2f37;
     height: 300px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #8585AD;
-    border: 2px solid #2F2F37;
+    background: #8585ad;
+    border: 2px solid #2f2f37;
     border-radius: 6px;
 }
 

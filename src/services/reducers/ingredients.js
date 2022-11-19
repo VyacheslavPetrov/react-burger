@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import {
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
@@ -11,22 +10,28 @@ import {
   CREATE_ORDER_REQUEST,
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_FAILED,
+  GET_ORDER_REQUEST,
+  GET_ORDER_SUCCESS,
+  GET_ORDER_FAILED,
+  GET_USER_ORDER_REQUEST,
+  GET_USER_ORDER_SUCCESS,
+  GET_USER_ORDER_FAILED,
 } from '../actions/ingredients';
-
 
 const initialState = {
   isLoading: false,
-  loaded: false,
   hasError: false,
-  allIngredients: {},
+  loaded: false,
+  allIngredients: [],
   burgerIngredients: {
     bun: null,
     otherIngredients: [],
-    counts: {}
+    counts: {},
   },
   currentOrder: null,
   orderRequest: false,
   orderFailed: false,
+  orderLoaded: false
 };
 
 export const ingredientsReducer = (state = initialState, action) => {
@@ -36,74 +41,124 @@ export const ingredientsReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         hasError: false,
-      }
+      };
     }
     case GET_PRODUCTS_SUCCESS: {
       return {
         ...state,
         hasError: false,
+        allIngredientsArr: action.itemsArr,
         allIngredients: action.items,
+        isLoading: false,
         loaded: true,
-        isLoading: false
-      }
+      };
     }
     case GET_PRODUCTS_FAILED: {
-      return {
-        ...initialState,
-        isLoading: false,
-        hasError: true
-      }
+      return { ...state, hasError: true, isLoading: false };
     }
     case CREATE_ORDER_REQUEST: {
       return {
         ...state,
         orderRequest: true,
         orderFailed: false,
-      }
+      };
     }
     case CREATE_ORDER_SUCCESS: {
-      return { ...state,
+      return {
+        ...state,
         orderFailed: false,
         currentOrder: action.order,
-        orderRequest: false
-      }
+        orderRequest: false,
+        burgerIngredients: {
+          bun: null,
+          otherIngredients: [],
+          counts: {},
+        },
+      };
     }
     case CREATE_ORDER_FAILED: {
-      return { ...initialState,
-        orderFailed: true,
-        orderRequest: false
-      }
+      return { ...state, orderFailed: true, orderRequest: false };
     }
+
+    case GET_ORDER_REQUEST: {
+      return {
+        ...state,
+        orderRequest: true,
+        orderFailed: false,
+        orderLoaded: false
+      };
+    }
+    case GET_ORDER_SUCCESS: {
+      const data = action.order ? action.order : null
+      return {
+        ...state,
+        orderFailed: false,
+        currentOrder: action.order,
+        orderRequest: false,
+        orderLoaded: true
+      };
+    }
+    case GET_ORDER_FAILED: {
+      return { ...state, orderFailed: true, orderRequest: false };
+    }
+
+    case GET_USER_ORDER_REQUEST: {
+      return {
+        ...state,
+        orderRequest: true,
+        orderFailed: false,
+        orderLoaded: false
+      };
+    }
+    case GET_USER_ORDER_SUCCESS: {
+      const data = action.order ? action.order : null
+      return {
+        ...state,
+        orderFailed: false,
+        currentOrder: data,
+        orderRequest: false,
+        orderLoaded: true
+      };
+    }
+    case GET_USER_ORDER_FAILED: {
+      return { ...state, orderFailed: true, orderRequest: false };
+    }
+
     case ADD_INGREDIENTS: {
-      const { type } = action.item
+      const { type } = action.item;
       if (type === 'bun') {
         return {
           ...state,
           burgerIngredients: {
             ...state.burgerIngredients,
-            bun: action.item
-          }
-        }
+            bun: action.item,
+          },
+        };
       }
       return {
         ...state,
         burgerIngredients: {
           ...state.burgerIngredients,
-          otherIngredients: [...state.burgerIngredients.otherIngredients, action.item]
-        }
-      }
+          otherIngredients: [
+            ...state.burgerIngredients.otherIngredients,
+            action.item,
+          ],
+        },
+      };
     }
     case DELETE_INGREDIENT: {
       return {
         ...state,
         burgerIngredients: {
           ...state.burgerIngredients,
-          otherIngredients: [...state.burgerIngredients.otherIngredients].filter(el => el.productId !== action.id)
-        }
-      }
+          otherIngredients: [
+            ...state.burgerIngredients.otherIngredients,
+          ].filter((el) => el.productId !== action.id),
+        },
+      };
     }
     case INCREASE_INGREDIENT: {
-      const { typeItem } = action
+      const { typeItem } = action;
       if (typeItem !== 'bun') {
         return {
           ...state,
@@ -111,14 +166,15 @@ export const ingredientsReducer = (state = initialState, action) => {
             ...state.burgerIngredients,
             counts: {
               ...state.burgerIngredients.counts,
-              [action.key]: (state.burgerIngredients.counts[action.key] || 0) + 1
-            }
-          }
-        }
+              [action.key]:
+              (state.burgerIngredients.counts[action.key] || 0) + 1,
+            },
+          },
+        };
       } else return state;
     }
     case DECREASE_INGREDIENT: {
-      const { typeItem } = action
+      const { typeItem } = action;
       if (typeItem !== 'bun') {
         return {
           ...state,
@@ -126,27 +182,29 @@ export const ingredientsReducer = (state = initialState, action) => {
             ...state.burgerIngredients,
             counts: {
               ...state.burgerIngredients.counts,
-              [action.key]: state.burgerIngredients.counts[action.key] - 1
-            }
-          }
-        }
+              [action.key]: state.burgerIngredients.counts[action.key] - 1,
+            },
+          },
+        };
       } else return state;
     }
     case UPDATE_CONSTRUCTOR: {
       const otherIngredients = [...state.burgerIngredients.otherIngredients];
-      otherIngredients.splice(action.toIndex, 0, otherIngredients.splice(action.fromIndex, 1)[0]);
+      otherIngredients.splice(
+        action.toIndex,
+        0,
+        otherIngredients.splice(action.fromIndex, 1)[0]
+      );
       return {
         ...state,
         burgerIngredients: {
           ...state.burgerIngredients,
-          otherIngredients: otherIngredients
-        }
-      }
+          otherIngredients: otherIngredients,
+        },
+      };
     }
     default: {
       return state;
     }
   }
 };
-
-
