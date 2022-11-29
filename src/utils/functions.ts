@@ -71,7 +71,7 @@ const getDaysForCard = (days: number) => (
         : days > 1 ? `${days} дня(-ей) назад`
             : 'Что-то пошло не так:(');
 
-//сформировать тату создания заказа для карточки
+//сформировать дату создания заказа для карточки
 export const conversionDateForCard = (date: string) => {
   const dayCreated: Date = new Date(date);
   const today: Date = new Date();
@@ -103,6 +103,11 @@ export const getStatus = (status: string) => {
 //найти текущий заказ
 export const filterOrders = (arr: Array<TOrder>, id: string) => {
   return arr?.filter((el: TOrder) => el.number === Number(id))[0]
+}
+
+//сортировка по номеру заказа
+export const sortOrders = (arr: Array<TOrder>) => {
+  return arr?.sort((a, b) => b.number - a.number)
 }
 
 //получить стоимость бургера

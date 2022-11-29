@@ -5,6 +5,7 @@ import OrdersItem from '../orders-item/orders-item';
 import { useDispatch, useSelector } from '../../hooks';
 import { WS_CONNECTION_START_AUTH, WS_CONNECTION_CLOSE_AUTH } from '../../services/constants/ws-actions-auth';
 import { TOrder } from '../../types';
+import {sortOrders} from '../../utils/functions'
 import styles from './profile-orders.module.css';
 
 function ProfileOrders() {
@@ -23,9 +24,10 @@ function ProfileOrders() {
   );
 
   const { orders } = useSelector((store) => store.wsAuth);
+  const sortedArray = sortOrders(orders)
   return (
     <ul className={cn(styles.list, 'mb-20')}>
-      {orders?.map((el: TOrder, i: number) => (
+      {sortedArray?.map((el: TOrder, i: number) => (
         <li className={cn(styles['list-item'])} key={i}>
           <Link
             to={{
