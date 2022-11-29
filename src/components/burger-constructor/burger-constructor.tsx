@@ -5,28 +5,28 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import PriceItem from '../../ui/price-item/price-item';
-import { calculationCost } from '../../utils/utils';
+import { calculationCost } from '../../utils/functions';
 import { createOrder } from '../../services/actions/ingredients';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks';
 import {
   DELETE_INGREDIENT,
   DECREASE_INGREDIENT,
-} from '../../services/actions/ingredients';
+  UPDATE_CONSTRUCTOR
+} from '../../services/constants/ingredients';
 import Preloader from '../preloader/preloader';
 import { useDrop } from 'react-dnd';
 import BurgerItem from '../burger-item/burger-item';
 import { push } from 'connected-react-router';
 import { useLocation, useHistory } from 'react-router-dom';
-import { UPDATE_CONSTRUCTOR } from '../../services/actions/ingredients';
 import { TProps, TIngredientWithProductId } from './types'
 import { TIngredient } from '../../types'
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor: FC<TProps> = ({ onDropHandler }) => {
   const { bun, otherIngredients } = useSelector(
-      (store: any) => store.ingredients.burgerIngredients
+      (store) => store.ingredients.burgerIngredients
   );
-  const { orderRequest } = useSelector((store: any) => store.ingredients);
+  const { orderRequest } = useSelector((store) => store.ingredients);
   const location = useLocation();
   const history = useHistory();
   const hasToken = localStorage.getItem('refreshToken')
@@ -46,7 +46,8 @@ const BurgerConstructor: FC<TProps> = ({ onDropHandler }) => {
   const handleClick = () => {
     if (hasToken) {
       const ingredientsId = otherIngredients.map((el: TIngredientWithProductId) => el._id);
-      dispatch(createOrder([bun._id, ...ingredientsId]));
+      const bunId: string = bun ? bun._id : ''
+      dispatch(createOrder([bunId, ...ingredientsId]));
       history.push({
         pathname: '/',
         state: {

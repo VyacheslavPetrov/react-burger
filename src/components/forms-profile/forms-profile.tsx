@@ -4,15 +4,15 @@ import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks';
 import { updateUser } from '../../services/actions/auth';
 import Preloader from '../preloader/preloader';
 import styles from './forms-profile.module.css';
 
 const FormsProfile = () => {
-  const currentUserName = useSelector((store: any) => store.auth.name);
-  const currentUserEmail = useSelector((store: any) => store.auth.email);
-  const { updateUserRequest } = useSelector((store: any) => store.auth)
+  const currentUserName = useSelector((store) => store.auth.name);
+  const currentUserEmail = useSelector((store) => store.auth.email);
+  const { updateUserRequest } = useSelector((store) => store.auth)
   const dispatch = useDispatch();
 
   const [state, setState] = useState({

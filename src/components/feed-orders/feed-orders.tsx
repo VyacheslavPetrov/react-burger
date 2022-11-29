@@ -2,13 +2,18 @@ import React, { memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import OrdersItem from '../orders-item/orders-item';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks';
 import { TOrder } from '../../types';
 import styles from './feed-orders.module.css';
+import Preloader from '../preloader/preloader';
 
 function FeedOrders() {
   const location = useLocation();
-  const { orders } = useSelector((store: any) => store.ws.messages)
+    const { orders } = useSelector((store) => store.ws)
+
+    if (!orders) {
+        return <Preloader />
+    }
 
   return (
     <section>

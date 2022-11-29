@@ -1,11 +1,6 @@
-import { TIngredient } from '../../types'
-
-export type TCountsIngredients = {
-    [name: string]: number;
-}
+import {TIngredient} from '../../types'
 
 export type TIngredientWithProductId = TIngredient & { productId: string }
-
 
 
 export type TProps = {

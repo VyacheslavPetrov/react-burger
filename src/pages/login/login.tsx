@@ -8,7 +8,7 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { login } from '../../services/actions/auth';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks';
 import styles from './login.module.css';
 
 function Login() {
@@ -17,11 +17,11 @@ function Login() {
     password: '',
   });
 
-  const userName = useSelector((store: any) => store.auth.name)
+  const userName = useSelector((store) => store.auth.name)
 
   const dispatch = useDispatch();
 
-  const handleInputChange = (event: SyntheticEvent) => {
+  const handleInputChange = (event: SyntheticEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     const name = target.name;

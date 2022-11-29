@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword } from '../../services/actions/auth';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks';
 import { Redirect } from 'react-router-dom';
 import { resetPasswordRequest } from '../../utils/api';
 import styles from './reset-password.module.css';
@@ -15,7 +15,7 @@ function ResetPassword() {
   })
   const dispatch = useDispatch();
 
-  const handleInputChange = (event: SyntheticEvent) => {
+  const handleInputChange = (event: SyntheticEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     const name = target.name;
@@ -37,7 +37,7 @@ function ResetPassword() {
         });
   };
 
-  const isforgotPasswordSaccess = useSelector((store: any) => store.auth.isforgotPasswordSaccess);
+  const isforgotPasswordSaccess = useSelector((store) => store.auth.isforgotPasswordSaccess);
 
   if (localStorage.getItem('refreshToken')) {
     return (

@@ -1,32 +1,49 @@
 import {
-  REGISTER_REQUEST,
-  REGISTER_SUCCESS,
-  REGISTER_FAILED,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILED,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAILED,
-  UPDATE_USER_REQUEST,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILED,
-  FORGOT_PASSWORD_REQUEST,
-  FORGOT_PASSWORD_SUCCESS,
-  FORGOT_PASSWORD_FAILED,
-  RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAILED,
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILED,
-  REFRESH_TOKEN_REQUEST,
-  REFRESH_TOKEN_SUCCESS,
-  REFRESH_TOKEN_FAILED
+  REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILED,
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED,
+  GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILED,
+  UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, UPDATE_USER_FAILED,
+  FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED,
+  RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED,
+  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILED,
+  REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_FAILED
+} from '../constants/auth';
+import { TAuthActions } from '../actions/auth';
 
-} from '../actions/auth';
+export type TAuthState = {
+  name: string,
+  email: string,
+  password: string,
 
-const initialState = {
+  registerRequest: boolean,
+  registerFailed: boolean,
+
+  loginRequest: boolean,
+  loginFailed: boolean,
+
+  updateUserRequest: boolean,
+  updateUserFailed: boolean,
+
+  logoutRequest: boolean,
+  logoutFailed: boolean,
+
+  getUserRequest: boolean,
+  getUserFailed: boolean,
+
+  forgotPasswordRequest: boolean,
+  forgotPasswordFailed: boolean,
+
+  isforgotPasswordRequest: boolean,
+  isforgotPasswordSaccess: boolean,
+
+  resetPasswordRequest: boolean,
+  resetPasswordFailed: boolean,
+
+  isTokenUpdated: boolean,
+  tokenUpdateDate: boolean,
+}
+
+const initialState: TAuthState = {
   name: '',
   email: '',
   password: '',
@@ -56,12 +73,12 @@ const initialState = {
   resetPasswordFailed: false,
 
   isTokenUpdated: false,
-  tokenUpdateDate: null,
+  tokenUpdateDate: false,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions): TAuthState => {
   switch (action.type) {
-    //Регистрация
+      //Регистрация
     case REGISTER_REQUEST: {
       return {
         ...state,
@@ -81,7 +98,7 @@ export const authReducer = (state = initialState, action) => {
     case REGISTER_FAILED: {
       return { ...state, registerFailed: true, registerRequest: false };
     }
-    //Вход в систему
+      //Вход в систему
     case LOGIN_REQUEST: {
       return {
         ...state,
@@ -101,7 +118,7 @@ export const authReducer = (state = initialState, action) => {
     case LOGIN_FAILED: {
       return { ...state, loginFailed: true, loginRequest: false };
     }
-    //Получение данных пользователя
+      //Получение данных пользователя
     case GET_USER_REQUEST: {
       return {
         ...state,
@@ -121,7 +138,7 @@ export const authReducer = (state = initialState, action) => {
     case GET_USER_FAILED: {
       return { ...state, getUserFailed: true, getUserRequest: false };
     }
-    //Изменение данных пользователя
+      //Изменение данных пользователя
     case UPDATE_USER_REQUEST: {
       return {
         ...state,
@@ -141,7 +158,7 @@ export const authReducer = (state = initialState, action) => {
     case UPDATE_USER_FAILED: {
       return { ...state, updateUserFailed: true, updateUserRequest: false };
     }
-    //Запрос на смену пароля
+      //Запрос на смену пароля
     case FORGOT_PASSWORD_REQUEST: {
       return {
         ...state,
@@ -169,7 +186,7 @@ export const authReducer = (state = initialState, action) => {
       };
     }
 
-    //Смена пароля
+      //Смена пароля
     case RESET_PASSWORD_REQUEST: {
       return {
         ...state,
@@ -185,7 +202,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
       };
     }
-    //Выход из системы
+      //Выход из системы
     case LOGOUT_REQUEST: {
       return {
         ...state,
@@ -206,7 +223,7 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, logoutFailed: true, logoutRequest: false };
     }
 
-    //Обновление токена
+      //Обновление токена
     case REFRESH_TOKEN_REQUEST: {
       return {
         ...state,

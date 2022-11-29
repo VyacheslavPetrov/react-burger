@@ -1,14 +1,16 @@
 import React, { memo } from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks';
 import Preloader from '../preloader/preloader';
 import styles from './order-details.module.css';
 const checkIcon = require('../../images/check.svg');
 
 const OrderDetails = () => {
-  const { orderRequest, orderFailed, currentOrder } = useSelector(
+  const { orderRequest, orderFailed, createOrder } = useSelector(
       (store: any) => store.ingredients
   );
+
+  const number = createOrder?.order.number
 
   return (
       <div className={cn(styles.order, 'p-15')}>
@@ -24,7 +26,7 @@ const OrderDetails = () => {
                       'mb-8'
                   )}
               >
-                {currentOrder.order.number}
+                {number}
               </h1>
               <p
                   className={cn(styles.order__text, 'text', 'text_type_main-medium')}

@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import cn from 'classnames';
 import { NavLink, useLocation } from 'react-router-dom';
 import { logout } from '../../services/actions/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../hooks';
 import styles from './nav-profile.module.css';
 
 const NewProfile = () => {
