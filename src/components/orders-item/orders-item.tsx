@@ -1,9 +1,9 @@
 import React, { memo, FC } from 'react';
 import cn from 'classnames';
 import PriceItem from '../../ui/price-item/price-item';
-import { useSelector } from 'react-redux';
-import { conversionDateForCard, getPrice, getBurgerIngredients } from '../../utils/utils';
-import { getStatus } from '../../utils/utils';
+import { useSelector } from '../../hooks';
+import { conversionDateForCard, getPrice, getBurgerIngredients } from '../../utils/functions';
+import { getStatus } from '../../utils/functions';
 import { NUNBER_OF_ELEMENTS_TO_BE_DRAWN } from '../../constants/constants';
 import { TProps } from './types';
 import { TIngredient } from '../../types';
@@ -11,7 +11,7 @@ import styles from './orders-item.module.css';
 
 
 const OrdersItem: FC<TProps> = ({ number, name, ingredients, createdAt, status }) => {
-    const { allIngredients } = useSelector((store: any) => store.ingredients);
+    const { allIngredients } = useSelector((store) => store.ingredients);
     const stringWithDay = conversionDateForCard(createdAt);
     const burgerIngredients = getBurgerIngredients(ingredients, allIngredients);
     const burgerItem = burgerIngredients.slice(0, NUNBER_OF_ELEMENTS_TO_BE_DRAWN);

@@ -16,9 +16,24 @@ import {
   GET_USER_ORDER_REQUEST,
   GET_USER_ORDER_SUCCESS,
   GET_USER_ORDER_FAILED,
-} from '../actions/ingredients';
+} from '../constants/ingredients';
+import { TIngredient, TBurgerIngredients, TIngredientWithProductId, TOrder, TOrderInfo } from '../../types'
+import { TIngredientsActions } from '../actions/ingredients';
 
-const initialState = {
+export type TIngredientsState = {
+  isLoading: boolean;
+  hasError: boolean;
+  loaded: boolean;
+  allIngredients: Array<TIngredient>;
+  burgerIngredients: TBurgerIngredients;
+  currentOrder: null | TOrder;
+  createOrder: null | TOrderInfo;
+  orderRequest: boolean;
+  orderFailed: boolean
+  orderLoaded: boolean
+};
+
+const initialState: TIngredientsState = {
   isLoading: false,
   hasError: false,
   loaded: false,
@@ -29,12 +44,13 @@ const initialState = {
     counts: {},
   },
   currentOrder: null,
+  createOrder: null,
   orderRequest: false,
   orderFailed: false,
   orderLoaded: false
 };
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (state = initialState, action: TIngredientsActions): TIngredientsState => {
   switch (action.type) {
     case GET_PRODUCTS_REQUEST: {
       return {
@@ -47,7 +63,6 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         hasError: false,
-        allIngredientsArr: action.itemsArr,
         allIngredients: action.items,
         isLoading: false,
         loaded: true,
@@ -67,7 +82,7 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         orderFailed: false,
-        currentOrder: action.order,
+        createOrder: action.order,
         orderRequest: false,
         burgerIngredients: {
           bun: null,
@@ -89,7 +104,6 @@ export const ingredientsReducer = (state = initialState, action) => {
       };
     }
     case GET_ORDER_SUCCESS: {
-      const data = action.order ? action.order : null
       return {
         ...state,
         orderFailed: false,
@@ -153,7 +167,7 @@ export const ingredientsReducer = (state = initialState, action) => {
           ...state.burgerIngredients,
           otherIngredients: [
             ...state.burgerIngredients.otherIngredients,
-          ].filter((el) => el.productId !== action.id),
+          ].filter((el: TIngredientWithProductId) => el.productId !== action.id),
         },
       };
     }
@@ -191,9 +205,9 @@ export const ingredientsReducer = (state = initialState, action) => {
     case UPDATE_CONSTRUCTOR: {
       const otherIngredients = [...state.burgerIngredients.otherIngredients];
       otherIngredients.splice(
-        action.toIndex,
-        0,
-        otherIngredients.splice(action.fromIndex, 1)[0]
+          action.toIndex,
+          0,
+          otherIngredients.splice(action.fromIndex, 1)[0]
       );
       return {
         ...state,

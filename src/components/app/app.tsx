@@ -6,21 +6,20 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
 import { getIngredients } from '../../services/actions/ingredients';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks';
 import { ProtectedRoute } from '../protected-route';
+import { TLocationTemplate } from '../../types';
 
 import styles from './app.module.css';
 
-
-
 const App = () => {
 
-  const location: any = useLocation();
+  const location: any = useLocation<TLocationTemplate>();
   const history = useHistory();
   const background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background;
   const dispatch = useDispatch();
   const { loaded } = useSelector(
-      (store: any) => store.ingredients
+      (store) => store.ingredients
   );
   useEffect(() => {
     if (!loaded) {

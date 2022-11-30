@@ -2,7 +2,7 @@ import React, { useState, memo, useCallback, SyntheticEvent } from 'react';
 import cn from 'classnames';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../hooks';
 import { register } from '../../services/actions/auth';
 import styles from './register.module.css';
 
@@ -14,7 +14,7 @@ function Register() {
   })
   const dispatch = useDispatch();
 
-  const handleInputChange = (event: SyntheticEvent) => {
+  const handleInputChange = (event: SyntheticEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     const name = target.name;

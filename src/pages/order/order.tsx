@@ -2,11 +2,10 @@ import React, { memo, useEffect } from 'react';
 import cn from 'classnames';
 import { useParams, Redirect, useRouteMatch } from 'react-router-dom';
 import PriceItem from '../../ui/price-item/price-item';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks';
 import { getOrder, getUserOrder } from '../../services/actions/ingredients';
 import Preloader from '../../components/preloader/preloader';
-import { conversionDateForCard, getStatus, getPrice, getBurgerIngredients, getBurgerIngredientsObjWithCount } from '../../utils/utils';
+import { conversionDateForCard, getStatus, getPrice, getBurgerIngredients, getBurgerIngredientsObjWithCount } from '../../utils/functions';
 import styles from './order.module.css';
 
 function Order() {
@@ -22,14 +21,14 @@ function Order() {
         },
         [dispatch, isProfile, id]
     );
-    const { allIngredients } = useSelector((store: any) => store.ingredients)
-    const order = useSelector((store: any) => store.ingredients.currentOrder)
-    const { orderLoaded } = useSelector((store: any) => store.ingredients)
-    const stringWithDay = conversionDateForCard(order?.createdAt);
-    const burgerIngredients = getBurgerIngredients(order?.ingredients, allIngredients)
+    const { allIngredients } = useSelector((store) => store.ingredients)
+    const order = useSelector((store) => store.ingredients.currentOrder)
+    const { orderLoaded } = useSelector((store) => store.ingredients)
+    const stringWithDay = order && order.createdAt && conversionDateForCard(order?.createdAt);
+    const burgerIngredients = order && order.ingredients && getBurgerIngredients(order?.ingredients, allIngredients)
     const arrUniqItem: Array<string> = Array.from(new Set(order?.ingredients))
-    const bI = getBurgerIngredientsObjWithCount(burgerIngredients)
-    const burgerPrice = getPrice(burgerIngredients)
+    const bI = burgerIngredients &&  getBurgerIngredientsObjWithCount(burgerIngredients)
+    const burgerPrice = burgerIngredients &&  getPrice(burgerIngredients)
     const name = order?.name
     const status = order?.status;
     const st = status ? getStatus(status) : null;
@@ -70,7 +69,7 @@ function Order() {
                 {arrUniqItem.map((el: string, i: number) => {
                     return <li className={cn(styles['list-item'], 'mr-6')} key={i}>
                         <div className={cn(styles.icon, 'mr-4')}>
-                            <img src={bI.item[el]?.image_mobile} alt='Вкусная булка' className={cn(styles.image)} />
+                            <img src={bI?.item[el]?.image_mobile} alt='Вкусная булка' className={cn(styles.image)} />
                         </div>
                         <p
                             className={cn(
@@ -79,12 +78,12 @@ function Order() {
                                 'text text_type_main-default'
                             )}
                         >
-                            {bI.item[el]?.name}
+                            {bI?.item[el]?.name}
                         </p>
                         <span className={cn('mr-1', 'text text_type_digits-default')}>
-              {bI.count[el]} x{' '}
+              {bI?.count[el]} x{' '}
             </span>
-                        <PriceItem price={bI.item[el]?.price} />
+                        <PriceItem price={bI?.item[el]?.price || 0} />
                     </li>
                 })}
             </ul>
@@ -94,7 +93,7 @@ function Order() {
         >
           {stringWithDay}
         </span>
-                <PriceItem price={burgerPrice} />
+                <PriceItem price={burgerPrice || 0} />
             </div>
         </div>
     );

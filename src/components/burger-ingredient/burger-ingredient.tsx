@@ -2,7 +2,7 @@ import React, { memo, FC } from 'react';
 import cn from 'classnames';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import PriceItem from '../../ui/price-item/price-item';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../hooks';
 import { COUNT_BUN } from '../../constants/constants';
 import { useDrag } from 'react-dnd';
 import { TIngredient } from '../../types';
@@ -20,7 +20,7 @@ const BurgerIngredient: FC<TIngredient> = (item) => {
     });
 
     const { counts, bun } = useSelector(
-        (store: any) => store.ingredients.burgerIngredients
+        (store) => store.ingredients.burgerIngredients
     );
     const isBun = item.type === 'bun'
     const count = isBun && bun && bun._id === item._id ? COUNT_BUN : counts[item._id] && counts[item._id]

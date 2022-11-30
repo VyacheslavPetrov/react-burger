@@ -1,20 +1,20 @@
-import React, { useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import cn from 'classnames';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import { TIngredient } from '../../types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { ADD_INGREDIENTS, INCREASE_INGREDIENT } from '../../services/actions/ingredients';
+import { ADD_INGREDIENTS, INCREASE_INGREDIENT } from '../../services/constants/ingredients';
 import Preloader from '../../components/preloader/preloader';
 import styles from './main.module.css';
 
 
 function Main() {
     const { isLoading, hasError, loaded } = useSelector(
-        (store: any) => store.ingredients
+        (store) => store.ingredients
     );
 
     const dispatch = useDispatch();
