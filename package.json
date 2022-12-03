@@ -2,6 +2,7 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.16.4",
@@ -39,6 +40,7 @@
     "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-prettier": "^3.3.1",
     "fetch-mock": "^9.11.0",
+    "gh-pages": "^4.0.0",
     "prettier": "^2.2.1",
     "prop-types": "^15.7.2",
     "redux-mock-store": "^1.5.4"
@@ -46,6 +48,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "format": "prettier --write .",
     "eject": "react-scripts eject",
