@@ -1,7 +1,7 @@
 describe("Modals", () => {
   before(function () {
     cy.viewport(1300, 800);
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
   });
 
   it("открытие модального окна с описанием ингредиента", () => {

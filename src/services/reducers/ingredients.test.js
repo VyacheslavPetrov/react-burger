@@ -7,7 +7,7 @@ import {
   INCREASE_INGREDIENT, DECREASE_INGREDIENT,
   GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_FAILED,
   GET_USER_ORDER_REQUEST, GET_USER_ORDER_SUCCESS, GET_USER_ORDER_FAILED,
-} from '../actions/ingredients';
+} from '../constants/ingredients';
 
 const initialState = {
   isLoading: false,
@@ -20,6 +20,7 @@ const initialState = {
     counts: {},
   },
   currentOrder: null,
+  createOrder: null,
   orderRequest: false,
   orderFailed: false,
   orderLoaded: false
@@ -86,7 +87,7 @@ describe('ingredients reducer', () => {
     expect(
       ingredientsReducer(initialState, {
         type: CREATE_ORDER_SUCCESS,
-        order: {
+        currentOrder: {
           name: "Space флюоресцентный бургер",
           order: { number: 4345 },
           success: true,
@@ -94,14 +95,20 @@ describe('ingredients reducer', () => {
         }
       })
     ).toEqual(expect.objectContaining({
-      currentOrder: {
-        name: "Space флюоресцентный бургер",
-        order: { number: 4345 },
-        success: true,
-        __proto__: Object
+      isLoading: false,
+      hasError: false,
+      loaded: false,
+      allIngredients: [],
+      burgerIngredients: {
+        bun: null,
+        otherIngredients: [],
+        counts: {},
       },
+      currentOrder: null,
+      createOrder: undefined,
       orderRequest: false,
       orderFailed: false,
+      orderLoaded: false
     }))
   })
 
