@@ -1,3 +1,4 @@
+const IngredientDetails = "[data-cy=ingredient-details]"
 describe("Modals", () => {
   before(function () {
     cy.viewport(1300, 800);
@@ -9,13 +10,13 @@ describe("Modals", () => {
 
     cy.get("@ingredient").click();
 
-    cy.get("[data-cy=ingredient-details]").as("ingredient-details");
+    cy.get(IngredientDetails).as("ingredient-details");
 
     cy.scrollTo("top");
   });
 
   it("отображение в модальном окне данных ингредиента", () => {
-    cy.get("[data-cy=ingredient-details]").as("ingredient-details");
+    cy.get(IngredientDetails).as("ingredient-details");
 
     cy.get("[data-cy=ingredient-details-image]").as(
       "ingredient-details-image"
@@ -43,7 +44,7 @@ describe("Modals", () => {
   });
 
   it("закрытие модального окна с описанием ингредиента при клике на кнопку закрытия", () => {
-    cy.get("[data-cy=ingredient-details]").as("ingredient-details");
+    cy.get(IngredientDetails).as("ingredient-details");
     cy.get("[data-cy=modal-close-button]").as("close-button");
 
     cy.get("@close-button").click();
