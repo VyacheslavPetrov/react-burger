@@ -31,7 +31,7 @@ const Modal: FC = ({ children }) => {
     return modalRoot && ReactDOM.createPortal(
         <>
             <div className={cn(styles.popup, 'pr-10', 'pl-10', 'pt-15', 'pb-15')}>
-        <span className={cn(styles.popup__close)} onClick={close}>
+        <span className={cn(styles.popup__close)} onClick={close} data-cy='modal-close-button'>
           <CloseIcon type='primary' />
         </span>
                 <div>{children}</div>

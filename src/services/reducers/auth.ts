@@ -43,7 +43,7 @@ export type TAuthState = {
   tokenUpdateDate: boolean,
 }
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
   name: '',
   email: '',
   password: '',

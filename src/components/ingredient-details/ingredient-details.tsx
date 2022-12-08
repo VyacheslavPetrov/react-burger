@@ -16,7 +16,7 @@ const IngredientDetails = () => {
     }
 
     return (
-        <div className={cn(styles.content)}>
+        <div className={cn(styles.content)} data-cy='ingredient-details'>
             <h1
                 className={cn(
                     styles.content__title,
@@ -28,7 +28,7 @@ const IngredientDetails = () => {
                 Детали ингредиента
             </h1>
             <div className={cn(styles.content__product, 'pr-15', 'pl-15')}>
-                <img src={currentBurger.image} alt='иконка' className={cn(styles.content__image)} />
+                <img src={currentBurger.image} alt='иконка' className={cn(styles.content__image)} data-cy='ingredient-details-image'/>
                 <h2
                     className={cn(
                         styles.content__text,
@@ -36,11 +36,12 @@ const IngredientDetails = () => {
                         'text_type_main-medium',
                         'mt-4'
                     )}
+                    data-cy='ingredient-details-name'
                 >
                     {' '}
                     {currentBurger.name}
                 </h2>
-                <p
+                {/*<p
                     className={cn(
                         styles.content__text,
                         'text',
@@ -50,7 +51,7 @@ const IngredientDetails = () => {
                     )}
                 >
                     Здесь будет описание
-                </p>
+                </p>*/}
                 <ul className={cn(styles.list)}>
                     <li
                         className={cn(
@@ -60,7 +61,7 @@ const IngredientDetails = () => {
                             'text_color_inactive'
                         )}
                     >
-                        <p className={cn(styles['list__item-text'])}>Калории, ккал</p>
+                        <p className={cn(styles['list__item-text'])} data-cy='ingredient-details-calories'>Калории, ккал</p>
                         <span className={cn('mt-2', 'text_type_digits-default')}>
               {currentBurger.calories}
             </span>
@@ -73,7 +74,7 @@ const IngredientDetails = () => {
                             'text_color_inactive'
                         )}
                     >
-                        <p className={cn(styles['list__item-text'])}>Белки, г</p>
+                        <p className={cn(styles['list__item-text'])} data-cy='ingredient-details-proteins'>Белки, г</p>
                         <span className={cn('mt-2', 'text_type_digits-default')}>
               {currentBurger.proteins}
             </span>
@@ -86,7 +87,7 @@ const IngredientDetails = () => {
                             'text_color_inactive'
                         )}
                     >
-                        <p className={cn(styles['list__item-text'])}>Жиры, г</p>
+                        <p className={cn(styles['list__item-text'])} data-cy='ingredient-details-fat'>Жиры, г</p>
                         <span className={cn('mt-2', 'text_type_digits-default')}>
               {currentBurger.fat}
             </span>
@@ -99,7 +100,7 @@ const IngredientDetails = () => {
                             'text_color_inactive'
                         )}
                     >
-                        <p className={cn(styles['list__item-text'])}>Углеводы, г</p>
+                        <p className={cn(styles['list__item-text'])} data-cy='ingredient-details-carbohydrates'>Углеводы, г</p>
                         <span className={cn('mt-2', 'text_type_digits-default')}>
               {currentBurger.carbohydrates}
             </span>

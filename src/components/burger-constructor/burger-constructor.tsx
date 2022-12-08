@@ -145,7 +145,7 @@ const BurgerConstructor: FC<TProps> = ({ onDropHandler }) => {
               />
           ) : null}
           {bun && (
-              <Button type='primary' size='large' onClick={handleClick}>
+              <Button type='primary' size='large' onClick={handleClick} data-cy="create-order">
                 Оформить заказ
               </Button>
           )}
