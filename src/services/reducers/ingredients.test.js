@@ -9,22 +9,7 @@ import {
   GET_USER_ORDER_REQUEST, GET_USER_ORDER_SUCCESS, GET_USER_ORDER_FAILED,
 } from '../constants/ingredients';
 
-const initialState = {
-  isLoading: false,
-  hasError: false,
-  loaded: false,
-  allIngredients: [],
-  burgerIngredients: {
-    bun: null,
-    otherIngredients: [],
-    counts: {},
-  },
-  currentOrder: null,
-  createOrder: null,
-  orderRequest: false,
-  orderFailed: false,
-  orderLoaded: false
-};
+const {initialState} = require('./ingredients')
 
 describe('ingredients reducer', () => {
   it('should return the initial state', () => {

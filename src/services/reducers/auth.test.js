@@ -10,38 +10,7 @@ import {
   REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_FAILED
 } from '../constants/auth';
 
-const initialState = {
-  name: '',
-  email: '',
-  password: '',
-
-  registerRequest: false,
-  registerFailed: false,
-
-  loginRequest: false,
-  loginFailed: false,
-
-  updateUserRequest: false,
-  updateUserFailed: false,
-
-  logoutRequest: false,
-  logoutFailed: false,
-
-  getUserRequest: false,
-  getUserFailed: false,
-
-  forgotPasswordRequest: false,
-  forgotPasswordFailed: false,
-
-  isforgotPasswordRequest: false,
-  isforgotPasswordSaccess: false,
-
-  resetPasswordRequest: false,
-  resetPasswordFailed: false,
-
-  isTokenUpdated: false,
-  tokenUpdateDate: false,
-};
+const {initialState} = require('./auth')
 
 describe('auth reducer', () => {
   it('should return the initial state', () => {

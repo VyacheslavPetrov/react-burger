@@ -1,8 +1,10 @@
+const {baseUrl} = require('./dragg.spec')
 const IngredientDetails = "[data-cy=ingredient-details]"
+
 describe("Modals", () => {
   before(function () {
     cy.viewport(1300, 800);
-    cy.visit('/');
+    cy.visit(baseUrl);
   });
 
   it("открытие модального окна с описанием ингредиента", () => {

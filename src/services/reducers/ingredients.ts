@@ -33,7 +33,7 @@ export type TIngredientsState = {
   orderLoaded: boolean
 };
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   isLoading: false,
   hasError: false,
   loaded: false,

@@ -1,9 +1,10 @@
-const { defineConfig } = require('cypress')
+export const baseUrl = 'http://localhost:3000'
+
 describe('service is available', function () {
   beforeEach(function () {
     cy.viewport(1300, 800);
     cy.log('Вход на страницу')
-    cy.visit('/');
+    cy.visit(baseUrl);
   })
 
   const dragAndDrop = (index) => {
